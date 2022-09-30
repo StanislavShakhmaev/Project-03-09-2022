@@ -8,18 +8,42 @@ int arr[n];
 int a = 0;
 int b = 0;
 int n1 = 0;
+const int rows = 3;
+const int cols = 2;
 
-int FillRand(int a, int b);
+void FillRand(int n1, int arr[], int a, int b);
+void FillRand(int n1, double arr[], int a, int b);
+void FillRand(int n1, float arr[], int a, int b);
+void FillRand(int n1, char arr[], int a, int b);
+
 void Print(int n1, int arr[]);
+
 void ReversePrint(int n1, int arr[]);
+
 int sum(int n1, int arr[]);
+double sum(int n1, double arr[]);
+float sum(int n1, float arr[]);
+char sum(int n1, char arr[]);
+//int sum(int n1, int arr[rows][cols]);
+//double sum(int n1, double arr[rows][cols]);
+//float sum(int n1, float arr[rows][cols]);
+//char sum(int n1, char arr[rows][cols]);
+
 float Avg(int n1, int arr[]);
+
 int minValueIn(int n1, int arr[]);
+
 int maxValueIn(int n1, int arr[]);
+
 void shiftLeft(int n1, int arr[], int a);
+
 void shiftRight(int n1, int arr[], int a);
+
 void sort(int n1, int arr[]);
+
 void UniqueRand(int n1, int arr[]);
+
+void Search(int n1, int arr[]);
 
 void main()
 {
@@ -46,11 +70,7 @@ void main()
 			cin >> a;
 			cout << "Введите верхний предел массива ->";
 			cin >> b;
-			srand(time(NULL));
-			for (int i = 0; i < n1; i++)
-			{
-				arr[i] = FillRand(a, b);
-			}
+			FillRand(n1, arr, a, b);
 		}
 		else if (number_of_function == 3)
 		{
@@ -99,17 +119,45 @@ void main()
 				Print(n1, arr);
 			}
 		}
+		Search(n1, arr);
 		cout << endl << "Выполнить программу еще раз? (для продолжения нажмите любую клавишу, для выхода esc) -> ";
 		key = _getch();
 	}
 }
 
-int FillRand(int a, int b)
+void FillRand(int n1, int arr[], int a, int b)
 {
-	int c=0;
-	c =a + rand() % (b+1);
-	return c;
+	srand(time(NULL));
+	for (int i = 0; i < n1; i++)
+	{
+		arr[i] = a + rand() % (b - a);
+	}
 }
+void FillRand(int n1, double arr[], int a, int b)
+{
+	srand(time(NULL));
+	for (int i = 0; i < n1; i++)
+	{
+		arr[i] = a + rand()/100 % (b - a);
+	}
+}
+void FillRand(int n1, float arr[], int a, int b)
+{
+	srand(time(NULL));
+	for (int i = 0; i < n1; i++)
+	{
+		arr[i] = a + rand() % (b - a);
+	}
+}
+void FillRand(int n1, char arr[], int a, int b)
+{
+	srand(time(NULL));
+	for (int i = 0; i < n1; i++)
+	{
+		arr[i] = a + rand() % (b - a);
+	}
+}
+
 void Print(int n1, int arr[])
 {
 	for (int i = 0; i < n1; i++)
@@ -124,6 +172,7 @@ void ReversePrint(int n1, int arr[])
 		cout << arr[i] << "  ";
 	}
 }
+
 int sum(int n1, int arr[])
 {
 	int c = 0;
@@ -133,6 +182,70 @@ int sum(int n1, int arr[])
 	}
 	return c;
 }
+double sum(int n1, double arr[])
+{
+	int c = 0;
+	for (int i = 0; i < n1; i++)
+	{
+		c = c + arr[i];
+	}
+	return c;
+}
+char sum(int n1, char arr[])
+{
+	int c = 0;
+	for (int i = 0; i < n1; i++)
+	{
+		c = c + arr[i];
+	}
+	return c;
+}
+float sum(int n1, float arr[])
+{
+	int c = 0;
+	for (int i = 0; i < n1; i++)
+	{
+		c = c + arr[i];
+	}
+	return c;
+}
+/*int sum(int n1, int arr[rows][cols])
+{
+	int c = 0;
+	for (int i = 0; i < n1; i++)
+	{
+		c = c + arr[i];
+	}
+	return c;
+}
+double sum(int n1, double arr[rows][cols])
+{
+	int c = 0;
+	for (int i = 0; i < n1; i++)
+	{
+		c = c + arr[i];
+	}
+	return c;
+}
+char sum(int n1, char arr[rows][cols])
+{
+	int c = 0;
+	for (int i = 0; i < n1; i++)
+	{
+		c = c + arr[i];
+	}
+	return c;
+}
+float sum(int n1, float arr[rows][cols])
+{
+	int c = 0;
+	for (int i = 0; i < n1; i++)
+	{
+		c = c + arr[i];
+	}
+	return c;
+}
+*/
 float Avg(int n1, int arr[])
 {
 	float c = 0;
@@ -211,5 +324,28 @@ void UniqueRand(int n1, int arr[])
 				}
 			}
 		} while (!unique);
+	}
+}
+void Search(int n1, int arr[])
+{
+	for (int i = 0; i < n1; i++)
+	{
+		sort(n1, arr);
+		int counter = 0;
+		int buffer = arr[i-1];
+		for (int j = i; j < n1; j++)
+		{
+			if (arr[i] == arr[j])
+			{
+				counter++;
+			}
+		}
+		if (arr[i] != buffer)
+		{
+			if (counter > 1)
+			{
+				cout << arr[i] << "  " << "В количестве - > " << counter << endl;
+			}
+		}
 	}
 }
